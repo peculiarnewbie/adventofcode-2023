@@ -2,6 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var console_1 = require("console");
 var fs = require("fs");
+var startTime = Date.now();
+var main = function () {
+    var input = fs.readFileSync("./input.txt", "utf8");
+    var arr = input.split("\n");
+    var answer = 0;
+    for (var i = 0; i < arr.length; i++) {
+        answer += calibrate(arr[i]);
+    }
+    return answer;
+};
 var isNumber = function (char) {
     if (char.length > 1)
         throw console_1.error;
@@ -26,11 +36,7 @@ var calibrate = function (line) {
     }
     return parseInt(val1);
 };
-var input = fs.readFileSync("./input.txt", "utf8");
-var arr = input.split("\n");
-var answer = 0;
-for (var i = 0; i < arr.length; i++) {
-    answer += calibrate(arr[i]);
-}
-console.log(answer, arr.length);
-console.log(calibrate(arr[1000]));
+var answer = main();
+var endTime = Date.now();
+console.log("answer:", answer);
+console.log("run time:", endTime - startTime, "ms");
